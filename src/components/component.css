@@ -1,0 +1,56 @@
+.contentContainerStyle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 0.01rem solid #f0f0f0;
+}
+
+.deleteIconStyle {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  margin-left: 2rem;
+}
+
+.labelStyle {
+  cursor: pointer;
+  min-width: 13.5rem;
+  outline: none;
+  letter-spacing: 0.5px;
+}
+
+.checkboxImgStyle {
+  margin-right: 1rem;
+  width: 1.2rem;
+  cursor: pointer;
+}
+
+.appWrapperStyle {
+  display: flex;
+  margin: 4rem auto 0;
+  max-width: 50rem;
+  justify-content: center;
+}
+
+.todoContainerStyle {
+  padding-right: 2rem;
+  border-right: 0.01rem solid #f0f0f0;
+}
+
+.taskContainerStyle {
+  padding-left: 2rem;
+}
+
+.createButtonStyle {
+  cursor: pointer;
+  margin-left: 1rem;
+  background-color: cornflowerblue;
+  box-shadow: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  outline: none;
+}
