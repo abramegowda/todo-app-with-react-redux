@@ -1,17 +1,27 @@
 import React from 'react';
+import _map from 'lodash/map';
+
 import InputWithButton from './InputWithButton';
 import Content from './Content';
-import _map from 'lodash/map';
 import { LIST_TYPE } from '../constants';
+import {
+  getTodoList,
+} from '../base/todo.selectors';
+import {
+  createTodoAction,
+  setSelectedTodoIdAction,
+  deleteTodoAction,
+} from '../base/todo.actions';
+import { connect } from 'react-redux';
 
 function TodoList(props) {
   const renderTodos = () => {
-    const { todos, actions } = props;
+    const { todos, setSelectedTodoIdAction, deleteTodoAction } = props;
     return _map(todos, todo => {
       const { id, title, isCompleted } = todo;
-      const { setSelectedTodoIdAction, deleteTodoAction } = actions;
       return (
         <Content
+          key={id}
           listId={id}
           label={title}
           isCompleted={isCompleted}
@@ -22,8 +32,7 @@ function TodoList(props) {
     });
   };
 
-  const { todos, actions } = props;
-  const { createTodoAction } = actions;
+  const { todos, createTodoAction } = props;
   const { TODO } = LIST_TYPE;
   return (
     <>
@@ -33,4 +42,14 @@ function TodoList(props) {
   );
 }
 
-export default TodoList;
+const mapState = state => ({
+  todos: getTodoList(state),
+});
+
+const mapDispatch = {
+  setSelectedTodoIdAction,
+  createTodoAction,
+  deleteTodoAction,
+};
+
+export default connect(mapState, mapDispatch)(TodoList);
