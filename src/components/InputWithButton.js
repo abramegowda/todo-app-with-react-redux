@@ -17,7 +17,7 @@ class InputWithButton extends React.Component {
   };
 
   triggerAction = () => {
-    const { createAction, title } = this.props;
+    const { createAction, title, resetAction, onTodoClick } = this.props;
     const { inputValue } = this.state;
     const payloadForTodo = {
       id: Math.floor(Math.random() * 10000),
@@ -33,28 +33,36 @@ class InputWithButton extends React.Component {
     const { TODO } = LIST_TYPE;
     const payload = title === TODO ? payloadForTodo : payloadForTask;
 
-    createAction(payload);
-    this.setState({
-      inputValue: '',
-    });
+    if (inputValue) {
+      createAction(payload);
+      if (title === TODO) {
+        resetAction();
+        onTodoClick(false);
+      }
+      this.setState({
+        inputValue: '',
+      });
+    } else {
+      alert('Enter Valid Title');
+    }
   };
 
   render() {
     const { title } = this.props;
     const { inputValue } = this.state;
     return (
-      <div style={{ marginBottom: '2rem' }}>
+      <div className='createContainer'>
         <input
           type='text'
-          placeholder={`add new ${title}...`}
+          placeholder={`Create ${title}...`}
           onChange={this.onChange}
           value={inputValue}
-          style={{ height: '1.5rem' }}
+          className='createInputStyle'
         />
         <button
           className='createButtonStyle'
           onClick={this.triggerAction}
-        >{`Create ${title}`}</button>
+        >+</button>
       </div>
     );
   }

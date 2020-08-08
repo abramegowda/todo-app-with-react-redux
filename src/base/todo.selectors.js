@@ -9,7 +9,7 @@ export const getTodoList = _defaultMemoize(state =>
   _get(state, 'todoReducer.todos')
 );
 
-const getSelectedTodoId = _defaultMemoize(state =>
+export const getSelectedTodoId = _defaultMemoize(state =>
   _get(state, 'todoReducer.SELECTED_TODO_ID')
 );
 

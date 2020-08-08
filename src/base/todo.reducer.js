@@ -11,7 +11,7 @@ const INITIAL_STATE = {
       id: 1,
       title: 'Grocery Shopping',
       isCompleted: false,
-      taskIds: [123, 245],
+      taskIds: [123, 245, 246, 247, 248],
     },
     {
       id: 2,
@@ -32,6 +32,21 @@ const INITIAL_STATE = {
       isCompleted: false,
     },
     {
+      id: 246,
+      title: 'Butter',
+      isCompleted: false,
+    },
+    {
+      id: 247,
+      title: 'Jam',
+      isCompleted: false,
+    },
+    {
+      id: 248,
+      title: 'Rice',
+      isCompleted: false,
+    },
+    {
       id: 367,
       title: 'Take prints',
       isCompleted: false,
@@ -42,8 +57,8 @@ const INITIAL_STATE = {
       isCompleted: true,
     },
   ],
-  SELECTED_TODO_ID: 2,
-  SELECTED_TODO_TITLE: 'Others',
+  SELECTED_TODO_ID: null,
+  SELECTED_TODO_TITLE: '',
 };
 
 const todoSlice = createSlice({
@@ -68,7 +83,7 @@ const todoSlice = createSlice({
         taskIdsForSelectedTodo,
         (statusArray, taskId) => {
           const task = _head(
-            _filter(tasks, (task) => {
+            _filter(tasks, task => {
               const { id } = task;
               if (taskId === id) return task;
             })
@@ -95,7 +110,7 @@ const todoSlice = createSlice({
       const { todos } = state;
       state.SELECTED_TODO_ID = selectedTodoId;
       const todoIndex = _findIndex(todos, todo => todo.id === selectedTodoId);
-      state.SELECTED_TODO_TITLE = todos[todoIndex].title;
+      state.SELECTED_TODO_TITLE = selectedTodoId ? todos[todoIndex].title : '';
     },
     deleteTodo(state, { payload: todoIdForDeletion }) {
       const { todos } = state;
