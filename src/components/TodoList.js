@@ -24,19 +24,18 @@ function TodoList(props) {
     } = props;
     const { TODO } = LIST_TYPE;
     return _map(todos, todo => {
-      const { id, title, isCompleted, taskIds } = todo;
+      const { id, taskIds } = todo;
       const totalTasks = taskIds.length;
       return (
         <Content
           key={id}
           listId={id}
-          label={title}
-          isCompleted={isCompleted}
           titleAction={setSelectedTodoIdAction}
           deleteAction={deleteTodoAction}
           totalTasks={totalTasks}
-          title={TODO}
+          listType={TODO}
           onTodoClick={onTodoClick}
+          {...todo}
         />
       );
     });
@@ -54,7 +53,7 @@ function TodoList(props) {
     <>
       <div className='todoContainerStyle'>
         <InputWithButton
-          title={TODO}
+          listType={TODO}
           createAction={createTodoAction}
           resetAction={setSelectedTodoIdAction}
           onTodoClick={onTodoClick}

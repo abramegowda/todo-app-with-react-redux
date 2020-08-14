@@ -117,17 +117,38 @@
   opacity: 0.3;
 }
 
-.createInputStyle {
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.createInputStyle,
+.createDescriptionStyle {
   height: 1.8rem;
   outline: none;
-  width: 90%;
   border: none;
   border-bottom: 1px solid #ccc;
   font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.createDescriptionStyle {
+  font-size: 14px;
 }
 
 .createContainer {
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
+}
+
+.description {
+  font-size: 14px;
+  color: #888;
+  margin: 0 20px;
+  max-width: 175px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }

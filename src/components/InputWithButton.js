@@ -1,68 +1,84 @@
-import React from 'react';
-import { LIST_TYPE } from '../constants';
-import './component.css';
+import React from "react";
+import { LIST_TYPE } from "../constants";
+import "./component.css";
 
+const { TODO } = LIST_TYPE;
 class InputWithButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: '',
+      inputTitle: "",
+      inputDescrption: "",
     };
   }
 
-  onChange = e => {
+  onTitleChange = e => {
     this.setState({
-      inputValue: e.target.value,
+      inputTitle: e.target.value,
+    });
+  };
+
+  onDescriptionChange = e => {
+    this.setState({
+      inputDescrption: e.target.value,
     });
   };
 
   triggerAction = () => {
-    const { createAction, title, resetAction, onTodoClick } = this.props;
-    const { inputValue } = this.state;
+    const { createAction, listType, resetAction, onTodoClick } = this.props;
+    const { inputTitle, inputDescrption } = this.state;
     const payloadForTodo = {
       id: Math.floor(Math.random() * 10000),
-      title: inputValue,
+      title: inputTitle,
+      description: inputDescrption,
       isCompleted: false,
       taskIds: [],
     };
     const payloadForTask = {
       id: Math.floor(Math.random() * 10000),
-      title: inputValue,
+      title: inputTitle,
       isCompleted: false,
     };
-    const { TODO } = LIST_TYPE;
-    const payload = title === TODO ? payloadForTodo : payloadForTask;
+    const payload = listType === TODO ? payloadForTodo : payloadForTask;
 
-    if (inputValue) {
-      createAction(payload);
-      if (title === TODO) {
-        resetAction();
-        onTodoClick(false);
-      }
-      this.setState({
-        inputValue: '',
-      });
-    } else {
-      alert('Enter Valid Title');
+    if (!inputTitle) return null;
+    createAction(payload);
+    if (listType === TODO) {
+      resetAction();
+      onTodoClick(false);
     }
+    this.setState({
+      inputTitle: "",
+      inputDescrption: "",
+    });
   };
 
   render() {
-    const { title } = this.props;
-    const { inputValue } = this.state;
+    const { listType } = this.props;
+    const { inputTitle, inputDescrption } = this.state;
     return (
       <div className='createContainer'>
-        <input
-          type='text'
-          placeholder={`Create ${title}...`}
-          onChange={this.onChange}
-          value={inputValue}
-          className='createInputStyle'
-        />
-        <button
-          className='createButtonStyle'
-          onClick={this.triggerAction}
-        >+</button>
+        <div className='inputContainer'>
+          <input
+            type='text'
+            placeholder={`Create ${listType}...`}
+            onChange={this.onTitleChange}
+            value={inputTitle}
+            className='createInputStyle'
+          />
+          {listType === TODO && (
+            <input
+              type='text'
+              placeholder={`add description...`}
+              onChange={this.onDescriptionChange}
+              value={inputDescrption}
+              className='createDescriptionStyle'
+            />
+          )}
+        </div>
+        <button className='createButtonStyle' onClick={this.triggerAction}>
+          +
+        </button>
       </div>
     );
   }

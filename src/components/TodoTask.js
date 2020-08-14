@@ -19,16 +19,15 @@ function TodoTask(props) {
   const renderTodos = () => {
     const { tasks, setTaskStatusAction, deleteTaskForTodoAction } = props;
     return _map(tasks, task => {
-      const { id, title, isCompleted } = task;
+      const { id } = task;
       return (
         <Content
           key={id}
           listId={id}
-          label={title}
-          isCompleted={isCompleted}
           iconAction={setTaskStatusAction}
           titleAction={setTaskStatusAction}
           deleteAction={deleteTaskForTodoAction}
+          {...task}
         />
       );
     });
@@ -39,7 +38,7 @@ function TodoTask(props) {
   return (
     <>
       <h3 style={{ margin: '0 0 1rem' }}>{selectedTodoTitle}</h3>
-      <InputWithButton title={TASK} createAction={createTaskForTodoAction} />
+      <InputWithButton listType={TASK} createAction={createTaskForTodoAction} />
       {tasks && renderTodos()}
     </>
   );

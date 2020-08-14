@@ -10,12 +10,14 @@ const INITIAL_STATE = {
     {
       id: 1,
       title: 'Grocery Shopping',
+      description: 'for a party tonight',
       isCompleted: false,
       taskIds: [123, 245, 246, 247, 248],
     },
     {
       id: 2,
       title: 'Others',
+      description: 'before I travel on Saturday',
       isCompleted: false,
       taskIds: [367, 489],
     },
@@ -53,7 +55,7 @@ const INITIAL_STATE = {
     },
     {
       id: 489,
-      title: 'Go to tailor',
+      title: 'Visit doctor',
       isCompleted: true,
     },
   ],

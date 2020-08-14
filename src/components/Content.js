@@ -7,17 +7,17 @@ import { LIST_TYPE } from '../constants';
 
 function Content(props) {
   const triggerAction = () => {
-    const { listId, titleAction, title, onTodoClick } = props;
+    const { listId, titleAction, listType, onTodoClick } = props;
     titleAction(listId);
-    if (title === TODO) {
+    if (listType === TODO) {
       onTodoClick(true);
     }
   };
 
   const triggerDeleteAction = () => {
-    const { listId, deleteAction, title, onTodoClick } = props;
+    const { listId, deleteAction, listType, onTodoClick } = props;
     deleteAction(listId);
-    if (title === TODO) {
+    if (listType === TODO) {
       onTodoClick(false);
     }
   };
@@ -31,7 +31,7 @@ function Content(props) {
     );
   };
 
-  const { listId, isCompleted, label, iconAction, title } = props;
+  const { listId, isCompleted, title, description, iconAction, listType } = props;
   const { TODO } = LIST_TYPE;
 
   return (
@@ -43,9 +43,11 @@ function Content(props) {
         onClick={triggerAction}
         className='labelStyle'
       >
-        {label}
+        <div className="title">{title}</div>
+        {listType === TODO &&
+          <div className="description">{description}</div>}
       </div>
-      {title === TODO && renderTasksCount()}
+      {listType === TODO && renderTasksCount()}
       <div>
         <img
           src='/img/remove.svg'
@@ -54,7 +56,7 @@ function Content(props) {
           onClick={triggerDeleteAction}
         />
       </div>
-      {title === TODO && (
+      {listType === TODO && (
         <img
           className='rightArrowIconStyle'
           src='/img/right-chevron.svg'
